@@ -21,7 +21,8 @@ cameraX = "1.4.1"
 # Coil image loading
 coil = "2.7.0"
 # TensorFlow Lite
-tflite = "2.14.0"
+# Updated for better compatibility with modern Android native page-size requirements.
+tflite = "2.17.0"
 # Coroutines
 coroutines = "1.10.2"
 # DataStore preferences

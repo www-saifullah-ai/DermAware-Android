@@ -11,7 +11,6 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ai.saifullah.dermaware.data.database.entity.AnalysisResult
-import ai.saifullah.dermaware.data.ml.MLManager
 import ai.saifullah.dermaware.data.model.PhotoAnalysisSession
 import ai.saifullah.dermaware.data.network.GeminiService
 import ai.saifullah.dermaware.data.repository.AnalysisRepository
@@ -25,18 +24,11 @@ import javax.inject.Inject
 
 /**
  * ViewModel for the photo analysis flow (Analyze screen and Results screen).
- * Handles: model initialization, running inference on a selected photo,
- * saving results to the database.
- *
- * ANALYSIS PRIORITY:
- * 1. If Gemini API key is set AND device is online → use Gemini (better accuracy)
- * 2. If Gemini fails → fall back to TFLite automatically
- * 3. If no API key OR no internet → use TFLite directly
+ * Handles: running online inference on a selected photo and saving results.
  */
 @HiltViewModel
 class AnalyzeViewModel @Inject constructor(
     private val application: Application,
-    private val mlManager: MLManager,
     private val geminiService: GeminiService,
     private val analysisRepository: AnalysisRepository,
     private val profileRepository: ProfileRepository
@@ -49,7 +41,6 @@ class AnalyzeViewModel @Inject constructor(
     // Represents all possible states of the analysis UI
     sealed class AnalysisState {
         object Idle : AnalysisState()                          // Waiting for user to pick a photo
-        object InitializingModel : AnalysisState()             // Loading the TFLite model
         object AnalyzingPhoto : AnalysisState()                // Running ML inference
         data class Results(val session: PhotoAnalysisSession) : AnalysisState()  // Analysis done
         data class Error(val message: String) : AnalysisState()
@@ -66,10 +57,6 @@ class AnalyzeViewModel @Inject constructor(
     private val _selectedPhotoUri = MutableStateFlow<Uri?>(null)
     val selectedPhotoUri: StateFlow<Uri?> = _selectedPhotoUri.asStateFlow()
 
-    // Whether the model is in demo mode (no real model file available)
-    private val _isDemoMode = MutableStateFlow(false)
-    val isDemoMode: StateFlow<Boolean> = _isDemoMode.asStateFlow()
-
     // ID of the saved result — used to navigate to results screen after saving
     private val _savedResultId = MutableStateFlow<Long?>(null)
     val savedResultId: StateFlow<Long?> = _savedResultId.asStateFlow()
@@ -80,30 +67,6 @@ class AnalyzeViewModel @Inject constructor(
 
     fun markResultsNavigated() {
         _hasNavigatedToResults.value = true
-    }
-
-    init {
-        // Initialize the TFLite model when ViewModel is created
-        initializeModel()
-    }
-
-    private fun initializeModel() {
-        viewModelScope.launch {
-            _analysisState.value = AnalysisState.InitializingModel
-            when (val result = mlManager.initialize()) {
-                is MLManager.ModelInitResult.Success -> {
-                    _analysisState.value = AnalysisState.Idle
-                    _isDemoMode.value = false
-                }
-                is MLManager.ModelInitResult.ModelNotFound -> {
-                    _analysisState.value = AnalysisState.Idle
-                    _isDemoMode.value = true  // Will use demo results
-                }
-                is MLManager.ModelInitResult.Error -> {
-                    _analysisState.value = AnalysisState.Error(result.message)
-                }
-            }
-        }
     }
 
     fun setBodyArea(bodyArea: String) {
@@ -126,8 +89,7 @@ class AnalyzeViewModel @Inject constructor(
     }
 
     /**
-     * Run analysis on the selected photo.
-     * Tries Gemini first (if available + online), then falls back to TFLite.
+     * Run online analysis on the selected photo.
      */
     fun analyzePhoto() {
         // Reset navigation flag so a new analysis can trigger navigation
@@ -142,29 +104,36 @@ class AnalyzeViewModel @Inject constructor(
         viewModelScope.launch {
             _analysisState.value = AnalysisState.AnalyzingPhoto
 
-            // Try Gemini first if API key is set and device is online
             val isGeminiAvailable = geminiService.isAvailable()
             val isDeviceOnline = isOnline()
             Log.d(TAG, "Gemini available: $isGeminiAvailable, Online: $isDeviceOnline")
 
-            // Track whether we're falling back from a Gemini failure
-            var wasFallback = false
-
-            if (isGeminiAvailable && isDeviceOnline) {
-                Log.d(TAG, "Attempting Gemini analysis...")
-                val geminiResult = tryGeminiAnalysis(photoUri)
-                if (geminiResult != null) {
-                    Log.d(TAG, "Gemini succeeded with ${geminiResult.results.size} results")
-                    _analysisState.value = AnalysisState.Results(geminiResult)
-                    saveResults(geminiResult, photoUri.toString())
-                    return@launch
-                }
-                Log.d(TAG, "Gemini returned null, falling back to TFLite")
-                wasFallback = true
+            if (!isGeminiAvailable) {
+                _analysisState.value = AnalysisState.Error(
+                    "Photo analysis is unavailable. Configure OPENROUTER_API_KEY for online AI."
+                )
+                return@launch
             }
 
-            // Use TFLite (either as primary or as fallback from Gemini)
-            runTFLiteAnalysis(photoUri, wasFallback)
+            if (!isDeviceOnline) {
+                _analysisState.value = AnalysisState.Error(
+                    "Internet connection required for photo analysis."
+                )
+                return@launch
+            }
+
+            Log.d(TAG, "Attempting Gemini analysis...")
+            val geminiResult = tryGeminiAnalysis(photoUri)
+            if (geminiResult != null) {
+                Log.d(TAG, "Gemini succeeded with ${geminiResult.results.size} results")
+                _analysisState.value = AnalysisState.Results(geminiResult)
+                saveResults(geminiResult, photoUri.toString())
+                return@launch
+            }
+
+            _analysisState.value = AnalysisState.Error(
+                "Unable to analyze this photo right now. Please try again."
+            )
         }
     }
 
@@ -218,44 +187,6 @@ class AnalyzeViewModel @Inject constructor(
     }
 
     /**
-     * Run the TFLite model on the selected photo (existing on-device analysis).
-     * Updates analysisState with the results when done.
-     */
-    private suspend fun runTFLiteAnalysis(photoUri: Uri, wasFallback: Boolean = false) {
-        when (val result = mlManager.analyze(photoUri)) {
-            is MLManager.InferenceResult.Success -> {
-                val session = PhotoAnalysisSession(
-                    photoPath = photoUri.toString(),
-                    bodyArea = _selectedBodyArea.value,
-                    results = result.results,
-                    isSuccessful = true,
-                    isOnlineAnalysis = false,
-                    fallbackMessage = if (wasFallback) "Online analysis unavailable. Using offline model." else ""
-                )
-                _isDemoMode.value = result.isDemoMode
-                _analysisState.value = AnalysisState.Results(session)
-
-                // Auto-save result to database
-                saveResults(session, photoUri.toString())
-            }
-            is MLManager.InferenceResult.NoMatch -> {
-                val session = PhotoAnalysisSession(
-                    photoPath = photoUri.toString(),
-                    bodyArea = _selectedBodyArea.value,
-                    results = emptyList(),
-                    isSuccessful = false,
-                    errorMessage = result.message,
-                    isOnlineAnalysis = false
-                )
-                _analysisState.value = AnalysisState.Results(session)
-            }
-            is MLManager.InferenceResult.Error -> {
-                _analysisState.value = AnalysisState.Error(result.message)
-            }
-        }
-    }
-
-    /**
      * Save the analysis results to the Room database.
      * Linked to the currently active profile.
      */
@@ -289,10 +220,5 @@ class AnalyzeViewModel @Inject constructor(
         _hasNavigatedToResults.value = false
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        // Do NOT call mlManager.close() here — MLManager is a Singleton that
-        // outlives any single ViewModel. Closing it would break future analysis
-        // attempts when a new ViewModel is created.
-    }
+    override fun onCleared() = super.onCleared()
 }

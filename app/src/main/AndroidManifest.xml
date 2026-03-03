@@ -8,15 +8,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- Camera permission — required for photo capture -->
     <uses-permission android:name="android.permission.CAMERA" />
-    <!-- Read media images — for selecting from gallery (Android 13+) -->
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-    <!-- Read external storage — for gallery access (Android 12 and below) -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
     <!-- Post notifications — for monthly skin check reminders -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <!-- Schedule exact alarms — for monthly reminders -->
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 
     <!-- Declares that camera is used but not required to install the app -->
     <uses-feature

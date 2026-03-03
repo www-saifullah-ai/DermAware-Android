@@ -72,8 +72,8 @@ android {
         applicationId = "ai.saifullah.dermaware"
         minSdk = 24
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 3
+        versionName = "1.0.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -157,9 +157,6 @@ dependencies {
 
     // Coil — for loading images from disk/URI
     implementation(libs.coil.compose)
-
-    // TensorFlow Lite — on-device ML inference (core interpreter only)
-    implementation(libs.tflite)
 
     // Coroutines — for async operations
     implementation(libs.kotlinx.coroutines.android)

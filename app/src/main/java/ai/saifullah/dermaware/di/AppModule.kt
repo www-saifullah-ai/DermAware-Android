@@ -6,7 +6,6 @@ import ai.saifullah.dermaware.data.database.DermAwareDatabase
 import ai.saifullah.dermaware.data.database.dao.AnalysisResultDao
 import ai.saifullah.dermaware.data.database.dao.SymptomResultDao
 import ai.saifullah.dermaware.data.database.dao.UserProfileDao
-import ai.saifullah.dermaware.data.ml.MLManager
 import ai.saifullah.dermaware.data.network.GeminiService
 import ai.saifullah.dermaware.BuildConfig
 import dagger.Module
@@ -55,20 +54,10 @@ object AppModule {
     }
 
     /**
-     * Provides the MLManager for TFLite inference.
-     * Needs the application context to load model from assets.
-     */
-    @Provides
-    @Singleton
-    fun provideMLManager(@ApplicationContext context: Context): MLManager {
-        return MLManager(context)
-    }
-
-    /**
      * Provides the GeminiService for online AI analysis via OpenRouter.
      * Reads the API key from BuildConfig (set in local.properties).
      * If the key is empty, the service reports isAvailable() = false
-     * and the app silently uses TFLite instead.
+     * and photo analysis is unavailable.
      */
     @Provides
     @Singleton

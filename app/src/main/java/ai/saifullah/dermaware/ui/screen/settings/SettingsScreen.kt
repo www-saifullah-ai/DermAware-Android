@@ -78,9 +78,9 @@ fun SettingsScreen(
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text("DermAware Privacy Policy", fontWeight = FontWeight.Bold)
                     Text("How analysis works:", fontWeight = FontWeight.Medium)
-                    Text("• Online mode: Your photo is sent to an AI service (Google Gemini via OpenRouter) for analysis. The photo is processed and not stored on their servers.")
+                    Text("• Online mode: Your photo is sent to an AI service (Google Gemini via OpenRouter) for analysis. Data handling is governed by the provider's policy.")
                     Text("• Offline mode: Everything stays on your device — no data leaves your phone.")
-                    Text("• The app automatically uses offline mode when there is no internet connection.")
+                    Text("• Photo analysis requires internet connection. Educational content remains available on device.")
                     Divider(modifier = Modifier.padding(vertical = 4.dp))
                     Text("Your data:", fontWeight = FontWeight.Medium)
                     Text("• Analysis history is stored locally on your device only")
@@ -117,7 +117,7 @@ fun SettingsScreen(
                         style = MaterialTheme.typography.labelMedium)
                     Text("This app is for educational awareness only. It is NOT a medical diagnostic tool. Always consult a qualified dermatologist for any skin concerns.",
                         style = MaterialTheme.typography.bodySmall)
-                    Text("Category: Health & Fitness (Educational)",
+                    Text("Category: Medical (Educational)",
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }

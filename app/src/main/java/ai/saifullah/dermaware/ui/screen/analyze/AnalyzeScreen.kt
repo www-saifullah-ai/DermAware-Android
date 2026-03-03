@@ -47,7 +47,6 @@ fun AnalyzeScreen(
     val analysisState by viewModel.analysisState.collectAsState()
     val selectedBodyArea by viewModel.selectedBodyArea.collectAsState()
     val selectedPhotoUri by viewModel.selectedPhotoUri.collectAsState()
-    val isDemoMode by viewModel.isDemoMode.collectAsState()
     val hasNavigatedToResults by viewModel.hasNavigatedToResults.collectAsState()
 
     // Navigate to results screen once analysis completes.
@@ -203,26 +202,23 @@ fun AnalyzeScreen(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
-            // Demo mode banner
-            if (isDemoMode) {
-                Card(
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.tertiaryContainer
-                    )
+            Card(
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.tertiaryContainer
+                )
+            ) {
+                Row(
+                    modifier = Modifier.padding(12.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Row(
-                        modifier = Modifier.padding(12.dp),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        Icon(Icons.Default.Info, contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onTertiaryContainer,
-                            modifier = Modifier.size(16.dp))
-                        Text(
-                            text = "Demo mode: Add dermaware_model.tflite to assets/ml/ for real analysis",
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.onTertiaryContainer
-                        )
-                    }
+                    Icon(Icons.Default.Info, contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onTertiaryContainer,
+                        modifier = Modifier.size(16.dp))
+                    Text(
+                        text = "Photo analysis requires internet connection.",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer
+                    )
                 }
             }
 
