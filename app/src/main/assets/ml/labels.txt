@@ -1,0 +1,50 @@
+# DermAware TFLite Model Labels
+# Format: technical_id|Display Name|Category
+# One condition per line — order matches the model's output array indices
+# Do NOT change the order without retraining/re-labeling the model
+
+acne_vulgaris|Acne|Inflammatory
+actinic_keratosis|Actinic Keratosis (Precancerous)|Dangerous
+atopic_dermatitis|Eczema (Atopic Dermatitis)|Inflammatory
+basal_cell_carcinoma|Basal Cell Carcinoma (Warning Signs)|Dangerous
+blackheads_comedones|Blackheads (Comedones)|Other
+candidiasis|Candidiasis (Yeast Infection)|Infection
+cellulitis|Cellulitis|Infection
+cherry_angioma|Cherry Angioma|Other
+contact_dermatitis|Contact Dermatitis|Inflammatory
+dermatofibroma|Dermatofibroma|Other
+dry_skin_xerosis|Dry Skin (Xerosis)|Other
+dysplastic_nevus|Abnormal Mole (Dysplastic Nevus)|Dangerous
+epidermoid_cyst|Epidermoid Cyst|Other
+folliculitis|Folliculitis|Infection
+herpes_simplex|Cold Sores (Herpes Simplex)|Infection
+hidradenitis_suppurativa|Hidradenitis Suppurativa|Inflammatory
+impetigo|Impetigo|Infection
+keloid|Keloid Scar|Other
+lichen_planus|Lichen Planus|Inflammatory
+lipoma|Lipoma|Other
+melanoma|Melanoma (Warning Signs)|Dangerous
+melasma|Melasma|Pigmentation
+milia|Milia (Milk Spots)|Other
+molluscum_contagiosum|Molluscum Contagiosum|Infection
+normal_healthy_skin|Normal Healthy Skin|Normal
+perioral_dermatitis|Perioral Dermatitis|Inflammatory
+pityriasis_rosea|Pityriasis Rosea|Inflammatory
+pityriasis_versicolor|Pityriasis Versicolor (Tinea Versicolor)|Pigmentation
+post_inflammatory_hyperpigmentation|Post-Inflammatory Hyperpigmentation|Pigmentation
+psoriasis|Psoriasis|Inflammatory
+rosacea|Rosacea|Inflammatory
+scabies|Scabies|Infection
+sebaceous_cyst|Sebaceous Cyst|Other
+seborrheic_dermatitis|Seborrheic Dermatitis (Dandruff)|Inflammatory
+skin_tag|Skin Tag (Acrochordon)|Other
+squamous_cell_carcinoma|Squamous Cell Carcinoma (Warning Signs)|Dangerous
+stretch_marks|Stretch Marks (Striae)|Other
+sunburn|Sunburn|Other
+tinea_capitis|Scalp Ringworm (Tinea Capitis)|Infection
+tinea_corporis|Ringworm (Tinea Corporis)|Infection
+tinea_pedis|Athlete's Foot (Tinea Pedis)|Infection
+tinea_unguium|Nail Fungus (Tinea Unguium)|Infection
+urticaria|Hives (Urticaria)|Inflammatory
+vitiligo|Vitiligo|Pigmentation
+warts_verruca|Warts (Verruca)|Infection

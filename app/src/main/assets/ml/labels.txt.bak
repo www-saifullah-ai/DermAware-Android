@@ -1,0 +1,50 @@
+# DermAware TFLite Model Labels
+# Format: technical_id|Display Name|Category
+# One condition per line — order matches the model's output array indices
+# Do NOT change the order without retraining/re-labeling the model
+
+tinea_corporis|Ringworm (Tinea Corporis)|Infection
+tinea_pedis|Athlete's Foot (Tinea Pedis)|Infection
+tinea_capitis|Scalp Ringworm (Tinea Capitis)|Infection
+tinea_unguium|Nail Fungus (Tinea Unguium)|Infection
+scabies|Scabies|Infection
+impetigo|Impetigo|Infection
+cellulitis|Cellulitis|Infection
+folliculitis|Folliculitis|Infection
+molluscum_contagiosum|Molluscum Contagiosum|Infection
+warts_verruca|Warts (Verruca)|Infection
+herpes_simplex|Cold Sores (Herpes Simplex)|Infection
+candidiasis|Candidiasis (Yeast Infection)|Infection
+atopic_dermatitis|Eczema (Atopic Dermatitis)|Inflammatory
+psoriasis|Psoriasis|Inflammatory
+seborrheic_dermatitis|Seborrheic Dermatitis (Dandruff)|Inflammatory
+contact_dermatitis|Contact Dermatitis|Inflammatory
+rosacea|Rosacea|Inflammatory
+acne_vulgaris|Acne|Inflammatory
+perioral_dermatitis|Perioral Dermatitis|Inflammatory
+hidradenitis_suppurativa|Hidradenitis Suppurativa|Inflammatory
+lichen_planus|Lichen Planus|Inflammatory
+pityriasis_rosea|Pityriasis Rosea|Inflammatory
+urticaria|Hives (Urticaria)|Inflammatory
+vitiligo|Vitiligo|Pigmentation
+melasma|Melasma|Pigmentation
+pityriasis_versicolor|Pityriasis Versicolor (Tinea Versicolor)|Pigmentation
+post_inflammatory_hyperpigmentation|Post-Inflammatory Hyperpigmentation|Pigmentation
+melanoma|Melanoma (Warning Signs)|Dangerous
+basal_cell_carcinoma|Basal Cell Carcinoma (Warning Signs)|Dangerous
+squamous_cell_carcinoma|Squamous Cell Carcinoma (Warning Signs)|Dangerous
+actinic_keratosis|Actinic Keratosis (Precancerous)|Dangerous
+dysplastic_nevus|Abnormal Mole (Dysplastic Nevus)|Dangerous
+sebaceous_cyst|Sebaceous Cyst|Other
+lipoma|Lipoma|Other
+keloid|Keloid Scar|Other
+stretch_marks|Stretch Marks (Striae)|Other
+dry_skin_xerosis|Dry Skin (Xerosis)|Other
+sunburn|Sunburn|Other
+milia|Milia (Milk Spots)|Other
+blackheads_comedones|Blackheads (Comedones)|Other
+cherry_angioma|Cherry Angioma|Other
+skin_tag|Skin Tag (Acrochordon)|Other
+dermatofibroma|Dermatofibroma|Other
+epidermoid_cyst|Epidermoid Cyst|Other
+normal_healthy_skin|Normal Healthy Skin|Normal

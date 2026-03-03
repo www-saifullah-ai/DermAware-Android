@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- DermAware brand colors -->
+    <color name="primary_teal">#FF2E7D8C</color>
+    <color name="primary_teal_light">#FF5CC8D9</color>
+    <color name="secondary_green">#FF4CAF50</color>
+    <color name="error_red">#FFB00020</color>
+
+    <!-- App background — very light teal-white for a clean medical feel -->
+    <color name="app_background">#FFF8FAFB</color>
+
+    <!-- Standard colors -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

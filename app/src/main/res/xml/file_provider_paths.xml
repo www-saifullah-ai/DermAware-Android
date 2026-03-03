@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Defines the directories where camera photos are temporarily saved -->
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- External cache directory — photos taken by the camera are stored here temporarily -->
+    <external-cache-path
+        name="camera_photos"
+        path="." />
+    <!-- Internal cache directory — fallback if external storage not available -->
+    <cache-path
+        name="camera_photos_internal"
+        path="." />
+</paths>

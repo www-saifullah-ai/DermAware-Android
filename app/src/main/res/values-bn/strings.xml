@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Bengali (বাংলা) translations for DermAware -->
+<resources>
+    <string name="app_name">DermAware</string>
+    <string name="app_tagline">সবার জন্য ত্বক সচেতনতা</string>
+
+    <!-- Disclaimer -->
+    <string name="disclaimer_short">শুধুমাত্র শিক্ষামূলক সচেতনতার জন্য — চিকিৎসা নির্ণয় নয়। একজন চর্মরোগ বিশেষজ্ঞের পরামর্শ নিন।</string>
+    <string name="disclaimer_full">DermAware একটি শিক্ষামূলক সরঞ্জাম যা সাধারণ ত্বকের স্বাস্থ্য তথ্য প্রদান করে। এটি পেশাদার চিকিৎসা পরামর্শ, রোগ নির্ণয় বা চিকিৎসার বিকল্প নয়। যেকোনো ত্বকের সমস্যায় সর্বদা একজন যোগ্য চর্মরোগ বিশেষজ্ঞের পরামর্শ নিন। জরুরি অবস্থায় অবিলম্বে জরুরি সেবায় যোগাযোগ করুন।</string>
+    <string name="disclaimer_title">গুরুত্বপূর্ণ স্বাস্থ্য বিজ্ঞপ্তি</string>
+    <string name="disclaimer_acknowledge">আমি বুঝেছি — চালিয়ে যান</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">হোম</string>
+    <string name="nav_analyze">বিশ্লেষণ</string>
+    <string name="nav_library">তথ্যভাণ্ডার</string>
+    <string name="nav_history">ইতিহাস</string>
+
+    <!-- Home screen -->
+    <string name="home_greeting">DermAware-এ আপনাকে স্বাগতম</string>
+    <string name="home_check_skin">আজ আপনার ত্বকের স্বাস্থ্য পরীক্ষা করুন</string>
+    <string name="action_analyze_photo">ছবি বিশ্লেষণ</string>
+    <string name="action_analyze_photo_sub">ছবি তুলুন বা নির্বাচন করুন</string>
+    <string name="action_check_symptoms">লক্ষণ পরীক্ষা</string>
+    <string name="action_check_symptoms_sub">আপনার লক্ষণ সম্পর্কে প্রশ্নের উত্তর দিন</string>
+    <string name="action_education">ত্বক শিক্ষা</string>
+    <string name="action_abcde">ABCDE নিয়ম</string>
+
+    <!-- Analyze screen -->
+    <string name="analyze_title">ত্বকের ছবি বিশ্লেষণ</string>
+    <string name="analyze_button">ছবি বিশ্লেষণ করুন</string>
+    <string name="analyze_loading">আপনার ছবি বিশ্লেষণ করা হচ্ছে\u2026</string>
+    <string name="analyze_camera">ক্যামেরা</string>
+    <string name="analyze_gallery">গ্যালারি</string>
+
+    <!-- Results -->
+    <string name="results_title">বিশ্লেষণের ফলাফল</string>
+    <string name="results_top_matches">সেরা মিল</string>
+    <string name="results_no_match">কোনো নির্ভরযোগ্য মিল পাওয়া যায়নি</string>
+    <string name="results_new_analysis">নতুন বিশ্লেষণ</string>
+    <string name="results_done">সম্পন্ন</string>
+
+    <!-- Symptom checker -->
+    <string name="symptom_title">লক্ষণ পরীক্ষক</string>
+    <string name="symptom_possible_matches">সম্ভাব্য মিল</string>
+    <string name="symptom_start_over">আবার শুরু করুন</string>
+    <string name="symptom_see_results">ফলাফল দেখুন</string>
+
+    <!-- Library -->
+    <string name="library_title">রোগের তথ্যভাণ্ডার</string>
+    <string name="library_search_hint">রোগ খুঁজুন\u2026</string>
+
+    <!-- History -->
+    <string name="history_title">ইতিহাস</string>
+    <string name="history_empty">এখনও কোনো ইতিহাস নেই</string>
+    <string name="history_clear_all">সব ইতিহাস মুছুন</string>
+
+    <!-- Education -->
+    <string name="education_title">ত্বক শিক্ষা</string>
+
+    <!-- Settings -->
+    <string name="settings_title">সেটিংস</string>
+    <string name="settings_language">ভাষা</string>
+    <string name="settings_dark_mode">প্রদর্শন</string>
+    <string name="settings_reminder">মাসিক ত্বক পরীক্ষার স্মারক</string>
+    <string name="settings_privacy_policy">গোপনীয়তা নীতি</string>
+    <string name="settings_about">DermAware সম্পর্কে</string>
+
+    <!-- Profiles -->
+    <string name="profile_title">প্রোফাইল</string>
+    <string name="profile_active_label">সক্রিয়</string>
+    <string name="profile_created">প্রোফাইল তৈরি হয়েছে</string>
+    <string name="profile_deleted">প্রোফাইল মুছে ফেলা হয়েছে</string>
+
+    <!-- Urgency levels -->
+    <string name="urgency_low">কম \u2014 বাড়িতে পর্যবেক্ষণ করুন</string>
+    <string name="urgency_medium">মধ্যম \u2014 এই সপ্তাহে ডাক্তার দেখান</string>
+    <string name="urgency_high">উচ্চ \u2014 ১\u20132ই দিনের মধ্যে ডাক্তার দেখান</string>
+    <string name="urgency_emergency">জরুরি \u2014 অবিলম্বে চিকিৎসা নিন</string>
+
+    <!-- Common actions -->
+    <string name="action_back">পেছনে</string>
+    <string name="action_next">পরবর্তী</string>
+    <string name="action_done">সম্পন্ন</string>
+    <string name="action_cancel">বাতিল</string>
+    <string name="action_delete">মুছুন</string>
+    <string name="action_create">তৈরি করুন</string>
+    <string name="action_skip">এড়িয়ে যান</string>
+    <string name="action_get_started">শুরু করুন</string>
+</resources>
